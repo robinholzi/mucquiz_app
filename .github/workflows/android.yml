@@ -31,7 +31,7 @@ jobs:
             sudo wget -q "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64" -O "/usr/bin/yq"
             sudo chmod +x /usr/bin/yq
 
-            echo "APP_VERSION=$(yq eval .version pubspec.yaml | cut -d+ -f1)" >> $GITHUB_ENV
+            echo "TAG_NAME=$(yq eval .version pubspec.yaml | cut -d+ -f1)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
             echo "COMMIT_MESSAGE=$(git log -n 1 --oneline | cut -d' ' -f2- -)" >> $GITHUB_ENV
             echo "CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> $GITHUB_ENV
 
@@ -51,10 +51,10 @@ jobs:
         with:
           files: |
             build/app/outputs/flutter-apk/*-release.apk
-          tag_name: v${{ env.APP_VERSION }}
+          tag_name: v${{ env.TAG_NAME }}
           name: ${{ env.COMMIT_MESSAGE }}
+          body: ${{ env.COMMIT_MESSAGE }}
           fail_on_unmatched_files: true
-          draft: true 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ env.CURRENT_BRANCH == 'main' }}
