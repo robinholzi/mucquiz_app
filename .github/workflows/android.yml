@@ -57,7 +57,7 @@ jobs:
           draft: true 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: ${{ env.CURRENT_BRANCH == 'main' && (startsWith(env.COMMIT_MESSAGE, '[Release]') || startsWith(env.COMMIT_MESSAGE, 'Release')) }}
+        if: ${{ env.CURRENT_BRANCH == 'main' }}
 
 
     - name: Delete older releases
