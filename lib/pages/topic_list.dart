@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:munich_data_quiz/api/models.dart';
+import 'package:munich_data_quiz/pages/topic.dart';
 import 'package:munich_data_quiz/widgets/topic.dart';
 
 class TopicListPage extends StatefulWidget {
@@ -40,7 +41,14 @@ class _TopicListPageState extends State<TopicListPage> {
     return ListView.builder(
       itemCount: topics.length,
       itemBuilder: (context, index) {
-        return TopicWidget(topic: topics[index]);
+        return TopicWidget(
+          topic: topics[index],
+          onTap: () async {
+            await Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => TopicPage(topics[index]),
+            ));
+          },
+        );
       },
       // Preload images for the next 2 screens
       cacheExtent: MediaQuery.of(context).size.height * 2,

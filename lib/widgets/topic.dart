@@ -60,7 +60,11 @@ class _TopicWidgetState extends State<TopicWidget> {
                     SizedBox(
                       width: double.infinity,
                       height: max(MediaQuery.of(context).size.height / 4, 200),
-                      child: ImageWidget(widget.topic.imageUrl),
+                      child: ImageWidget(
+                        widget.topic.imageUrl,
+                        heroTag: "topic-image",
+                        id: widget.topic.topicId,
+                      ),
                     ),
                   if ((widget.topic.description ?? "").isNotEmpty)
                     Padding(
