@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
 import 'package:munich_data_quiz/widgets/image_widget.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class TopicPage extends StatefulWidget {
   const TopicPage(this.topic, {Key? key}) : super(key: key);
@@ -12,6 +14,8 @@ class TopicPage extends StatefulWidget {
 }
 
 class _TopicPageState extends State<TopicPage> {
+  final _btnController = RoundedLoadingButtonController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +50,23 @@ class _TopicPageState extends State<TopicPage> {
                 ),
               ),
             const Divider(),
+            RoundedLoadingButton(
+              controller: _btnController,
+              onPressed: () async {
+                // TODO: Load data
+                await Future.delayed(const Duration(seconds: 2));
 
-            // TODO: Add start button
+                try {
+                  _btnController.success();
+                } catch (_) {}
+
+                await Future.delayed(
+                  const Duration(seconds: 2),
+                  () => _btnController.reset(),
+                );
+              },
+              child: Text(AppLocalizations.of(context)!.startQuiz),
+            ),
           ],
         ),
       ),

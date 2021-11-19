@@ -1,16 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:munich_data_quiz/api/models.dart';
-import 'package:munich_data_quiz/pages/topic.dart';
+import 'package:munich_data_quiz/pages/topic_details.dart';
 import 'package:munich_data_quiz/widgets/topic.dart';
 
 class TopicListPage extends StatefulWidget {
   const TopicListPage({Key? key}) : super(key: key);
-
-  static double calculateTopicHeight(BuildContext context) {
-    return max(MediaQuery.of(context).size.height / 3, 250);
-  }
 
   @override
   _TopicListPageState createState() => _TopicListPageState();
