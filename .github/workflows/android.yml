@@ -23,8 +23,8 @@ jobs:
       - name: Install app dependencies (flutter pub get)
         run: flutter pub get
       
-      - name: Run tests
-        run: flutter test
+      # - name: Run tests
+      #   run: flutter test
 
       - name: Extract app variables to workflow env
         run: |
