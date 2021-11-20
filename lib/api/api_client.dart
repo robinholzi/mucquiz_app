@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class APIClient {
-  static final httpClient = http.Client();
+  final httpClient = http.Client();
 
   Future<dynamic> fetchJSON(Uri url) async {
     return jsonDecode(await fetch(url));
@@ -20,7 +20,7 @@ class APIClient {
     var response = await httpClient.get(url, headers: {
       "Accept": "application/json",
       "User-Agent": "munich_data_quiz",
-    });
+    }).timeout(const Duration(seconds: 15));
 
     if (kDebugMode) {
       debugPrint(

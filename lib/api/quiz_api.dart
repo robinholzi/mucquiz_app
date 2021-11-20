@@ -57,14 +57,14 @@ class QuizAPI extends APIClient {
 
     var reqBody = jsonEncode(submissions);
 
-    var response = await APIClient.httpClient.post(
+    var response = await httpClient.post(
       uri,
       body: reqBody,
       headers: {
         "Accept": "application/json",
         "User-Agent": "munich_data_quiz",
       },
-    );
+    ).timeout(const Duration(seconds: 15));
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
       throw HttpException("Unexpected status code ${response.statusCode}");
