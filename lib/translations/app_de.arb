@@ -12,6 +12,7 @@
     "endQuizDialogContent": "Möchtest du weiter zur Auswertung?",
     "endQuizOneQuestionMissing": "Eine Frage ist noch unbeantwortet. Möchtest du trotzdem die Auswertung sehen?",
     "endQuizQuestionsMissing": "{count} Fragen sind noch unbeantwortet. Möchtest du trotzdem die Auswertung sehen?",
+    "error": "Fehler",
     "@endQuizQuestionsMissing": {
         "placeholders": {
             "count": {

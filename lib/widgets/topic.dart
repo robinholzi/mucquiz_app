@@ -23,7 +23,8 @@ class _TopicWidgetState extends State<TopicWidget> {
   @override
   Widget build(BuildContext context) {
     final radius = BorderRadius.circular(10.0);
-    return Center(
+    return SizedBox(
+      width: double.infinity,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: radius,
@@ -63,7 +64,7 @@ class _TopicWidgetState extends State<TopicWidget> {
                       child: ImageWidget(
                         widget.topic.imageUrl,
                         heroTag: "topic-image",
-                        id: widget.topic.topicId,
+                        id: "${widget.topic.id}",
                       ),
                     ),
                   if ((widget.topic.description ?? "").isNotEmpty)

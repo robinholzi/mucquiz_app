@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:munich_data_quiz/api/models.dart';
+import 'package:munich_data_quiz/api/quiz_api.dart';
 import 'package:munich_data_quiz/pages/topic_details.dart';
 import 'package:munich_data_quiz/widgets/topic.dart';
 
@@ -11,26 +12,6 @@ class TopicListPage extends StatefulWidget {
 }
 
 class _TopicListPageState extends State<TopicListPage> {
-  final dummyTopics = [
-    Topic(
-      title: "Politik",
-      description:
-          "Das ist eine Politik-Beschreibung, die theoretisch mehrere Zeilen braucht",
-      imageUrl: "https://via.placeholder.com/350x250",
-      topicId: "politics",
-    ),
-    Topic(
-      title: "Stadtleben",
-      description: "Oktoberfest etc.",
-      imageUrl: "https://via.placeholder.com/400x250",
-      topicId: "city",
-    ),
-  ];
-
-  Future<List<Topic>> getDummyTopics() async {
-    return dummyTopics;
-  }
-
   Widget _topicList(List<Topic> topics) {
     return ListView.builder(
       itemCount: topics.length,
@@ -53,7 +34,7 @@ class _TopicListPageState extends State<TopicListPage> {
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<List<Topic>>(
-        future: Future.delayed(const Duration(seconds: 1), getDummyTopics),
+        future: QuizAPI().topics(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) {
             return ErrorWidget(snapshot.error!);

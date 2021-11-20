@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
+import 'package:munich_data_quiz/api/quiz_api.dart';
 import 'package:munich_data_quiz/pages/quiz_page.dart';
 import 'package:munich_data_quiz/widgets/image_widget.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -29,7 +30,7 @@ class _TopicPageState extends State<TopicPage> {
             ImageWidget(
               widget.topic.imageUrl,
               heroTag: "topic-image",
-              id: widget.topic.topicId,
+              id: "${widget.topic.id}",
             ),
             const Divider(),
             Text(
@@ -54,68 +55,28 @@ class _TopicPageState extends State<TopicPage> {
             RoundedLoadingButton(
               controller: _btnController,
               onPressed: () async {
-                // TODO: Load data
-                await Future.delayed(const Duration(seconds: 1));
-
-                var quiz = GeneratedQuiz(
-                  topic: widget.topic,
-                  questions: [
-                    QuizQuestion(
-                      id: 1,
-                      title:
-                          "Was ist wenn wir einfach eine echt lange Frage hätten, die definitiv mehrere Zeilen braucht?",
-                      // description: "Zahlen kann man typischerweise Addieren.",
-                      description: null,
-                      imgUrl: "https://via.placeholder.com/350x150",
-                      answers: [
-                        QuizAnswer(id: 4, text: "Lorem ipsum dolor sit amet"),
-                        QuizAnswer(id: 3, text: "😂👍"),
-                        QuizAnswer(id: 2, text: " ipsum dolor sit"),
-                        QuizAnswer(id: 1, text: "Lorem amet sönderzäichen"),
-                      ],
-                    ),
-                    QuizQuestion(
-                      id: 2,
-                      title: "Was ist 3-3?",
-                      description:
-                          "Zahlen kann man typischerweise Subtrahieren.",
-                      imgUrl: "https://via.placeholder.com/350x150",
-                      answers: [
-                        QuizAnswer(id: 3, text: "😂👍"),
-                        QuizAnswer(id: 1, text: "Lorem amet sönderzäichen"),
-                        QuizAnswer(
-                            id: 2,
-                            text:
-                                "Diese Antwort ist etwas länger. Mal schauen, wie das auf dem UI aussieht."),
-                        QuizAnswer(id: 4, text: "Lorem ipsum dolor sit amet"),
-                      ],
-                    ),
-                    QuizQuestion(
-                      id: 3,
-                      title: "Does this question have any images?",
-                      // description: "Zahlen kann man typischerweise Addieren.",
-                      description: "No images to be seen",
-                      imgUrl: null,
-                      answers: [
-                        QuizAnswer(id: 3, text: "😂👍"),
-                        QuizAnswer(id: 1, text: "Lorem amet sönderzäichen"),
-                      ],
-                    ),
-                  ],
-                );
-
-                await Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => QuizPage(widget.topic, quiz),
-                ));
-
                 try {
-                  _btnController.success();
-                } catch (_) {}
+                  var quiz = await QuizAPI().generateQuiz(widget.topic.id);
 
-                await Future.delayed(
-                  const Duration(seconds: 1),
-                  () => _btnController.reset(),
-                );
+                  await Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => QuizPage(widget.topic, quiz),
+                  ));
+
+                  try {
+                    _btnController.success();
+                  } catch (_) {}
+                } catch (err) {
+                  await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(AppLocalizations.of(context)!.error),
+                        content: Text("$err"),
+                      );
+                    },
+                  );
+                  _btnController.reset();
+                }
               },
               child: Text(AppLocalizations.of(context)!.startQuiz),
             ),

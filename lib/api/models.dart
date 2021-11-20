@@ -3,20 +3,20 @@ class Topic {
     required this.title,
     required this.description,
     required this.imageUrl,
-    required this.topicId,
+    required this.id,
   });
 
   final String title;
   final String? description;
   final String? imageUrl;
-  final String topicId;
+  final int id;
 
   factory Topic.fromJson(Map<String, dynamic> json) {
     return Topic(
       title: json["title"],
       description: json["description"],
       imageUrl: json["image_url"],
-      topicId: json["topic_id"],
+      id: json["id"],
     );
   }
 }
@@ -36,7 +36,7 @@ class GeneratedQuiz {
       questions: json["questions"] == null
           ? []
           : List<QuizQuestion>.from(
-              json["questions"].map((x) => Topic.fromJson(x))),
+              json["questions"].map((x) => QuizQuestion.fromJson(x))),
     );
   }
 }

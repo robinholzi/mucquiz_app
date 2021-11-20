@@ -12,17 +12,35 @@ class QuizAPI extends APIClient {
   QuizAPI._internal();
 
   Uri _endpoint(String path, Map<String, dynamic> query) {
-    return Uri.https('url_todo', "/v1" + path, query);
+    return Uri.http('hackatum.robinh.xyz:6942', "api/v1" + path, query);
   }
 
-  // TODO: Thus currently doesn't handle code, title, message etc.
+  Future<dynamic> _fetchJSON(Uri uri) async {
+    var withCode = await fetchJSON(uri) as Map<String, dynamic>;
+    if (withCode.containsKey("code") && withCode["code"] != 0) {
+      throw Exception(
+          withCode["message"] ?? "error code ${withCode['code']} is non-zero");
+    }
+
+    return withCode["data"];
+  }
+
   Future<List<Topic>> topics() async {
-    var query = <String, dynamic>{};
+    var uri = _endpoint("/topic/list", {});
 
-    var uri = _endpoint("/topics", query);
-
-    var list = await fetchJSON(uri) as List<dynamic>;
+    var list = await _fetchJSON(uri) as List<dynamic>;
 
     return list.map((e) => Topic.fromJson(e)).toList();
+  }
+
+  Future<GeneratedQuiz> generateQuiz(int topicId, [int size = 10]) async {
+    var uri = _endpoint("/quiz/generate/", {
+      "topic_id": "$topicId",
+      "size": "$size",
+    });
+
+    var quiz = await _fetchJSON(uri);
+
+    return GeneratedQuiz.fromJson(quiz);
   }
 }
