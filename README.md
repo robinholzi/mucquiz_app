@@ -1,16 +1,32 @@
-# munich_data_quiz
+# MucQuiz
+MucQuiz is a quiz app that helps you learn about the City of Munich.
 
-A new Flutter project.
+![](.github/screenshots/banner.jpg)
 
-## Getting Started
+It is [a submission](https://devpost.com/software/datenteam) for the City of Munich challenge at [hackaTUM](https://hack.tum.de/) 2021.
 
-This project is a starting point for a Flutter application.
+### Screenshots
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+|                           Topic listing                           |                          Topic                           |                           Topic                           |
+| :---------------------------------------------------------------: | :------------------------------------------------------: | :-------------------------------------------------------: |
+| ![Topic listing](.github/screenshots/topic-overview.jpg?raw=true) | ![Topic](.github/screenshots/topic-details.jpg?raw=true) | ![Topic](.github/screenshots/topic-details2.jpg?raw=true) |
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+|                          Quiz Question                           |                           Quiz Question                           |
+| :--------------------------------------------------------------: | :---------------------------------------------------------------: |
+| ![Quiz question](.github/screenshots/quiz-question.jpg?raw=true) | ![Quiz question](.github/screenshots/quiz-question2.jpg?raw=true) |
+
+
+|                                                                      |                            Quiz Evaluation                            |                                                                       |
+| :------------------------------------------------------------------: | :-------------------------------------------------------------------: | :-------------------------------------------------------------------: |
+| ![Quiz evaluation](.github/screenshots/quiz-evaluation.jpg?raw=true) | ![Quiz evaluation](.github/screenshots/quiz-evaluation2.jpg?raw=true) | ![Quiz evaluation](.github/screenshots/quiz-evaluation3.jpg?raw=true) |
+
+
+
+### Installation
+You can install this app on your Android device by [downloading the APK file from the releases section of this repository](https://github.com/nerotyc/mucquiz-app/releases/latest) ([direct link](https://github.com/nerotyc/mucquiz-app/releases/latest/download/app-release.apk)). Then open it from the file manager to install it (you might need to allow unknown app sources in system settings).
+
+
+### Other repositories
+There's a repository for the [backend service](https://github.com/nerotyc/mucquiz-backend) and another one for the [data parsing logic](https://github.com/nerotyc/mucquiz_data_parsing).
