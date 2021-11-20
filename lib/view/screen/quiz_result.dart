@@ -50,31 +50,34 @@ class _QuizResultPageState extends State<QuizResultPage> {
 
   Widget _singleQuestionResult(
       QuizQuestion question, EvaluatedQuestion result) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if ((question.imgUrl ?? "").isNotEmpty)
-          ClipRRect(
-            borderRadius: const BorderRadius.all(MQTheme.radiusCard),
-            child: ImageWidget(question.imgUrl!),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: MQTheme.screenPaddingH),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if ((question.imgUrl ?? "").isNotEmpty)
+            ClipRRect(
+              borderRadius: const BorderRadius.all(MQTheme.radiusCard),
+              child: ImageWidget(question.imgUrl!),
+            ),
+          Padding(
+            padding: EdgeInsets.only(
+                top: MQTheme.cardPaddingBigV,
+                bottom: MQTheme.cardPaddingBigV),
+            child: Text(
+              question.title,
+              style: titleStyle,
+              textAlign: TextAlign.center,
+            ),
           ),
-        Padding(
-          padding: EdgeInsets.only(
-              top: MQTheme.cardPaddingBigV,
-              bottom: MQTheme.cardPaddingV),
-          child: Text(
-            question.title,
-            style: titleStyle,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        if ((question.description ?? "").isNotEmpty)
-          Text(
-            question.description!,
-            textAlign: TextAlign.center,
-          ),
-        ...question.answers.map((a) => _answer(context, a, result))
-      ],
+          if ((question.description ?? "").isNotEmpty)
+            Text(
+              question.description!,
+              textAlign: TextAlign.center,
+            ),
+          ...question.answers.map((a) => _answer(context, a, result))
+        ],
+      ),
     );
   }
 
@@ -104,7 +107,6 @@ class _QuizResultPageState extends State<QuizResultPage> {
       ),
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.all(16),
         child: FutureBuilder<QuizSubmissionResponse>(
           future: QuizAPI().evaluateQuizTotal(widget.submission),
           builder: (context, snapshot) {

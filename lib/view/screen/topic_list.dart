@@ -89,18 +89,9 @@ class _TopicListPageState extends State<TopicListPage> {
           ),
           child: Column(
             children: [
-              RichText(
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1000,
-                text: TextSpan(
-                    style: MQTheme.defaultTextStyle,
-                    text: "No topics found."
-                ),
-              ),
               InfoCard(
                 cardColor: MQColor.primaryColor,
-                text: "asaasasdf asfasdf asdf asdf  asdf asdf asdasdf"
-                    " asdf asdf asdf asdf asdf asdf asdf asdf Dasd asdf", // TODO test
+                text: "No topics found.",
               ),
             ],
           ),

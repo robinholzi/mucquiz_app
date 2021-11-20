@@ -5,6 +5,7 @@ import 'package:munich_data_quiz/constants/color.dart';
 import 'package:munich_data_quiz/view/screen/quiz_result.dart';
 import 'package:munich_data_quiz/view/style/screen/base_titled.dart';
 import 'package:munich_data_quiz/view/widget/button/rounded_button.dart';
+import 'package:munich_data_quiz/view/widget/dialog/popup_dialog_widget.dart';
 import 'package:munich_data_quiz/widgets/quiz_question.dart';
 import 'package:munich_data_quiz/widgets/title/titlebar.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
@@ -81,26 +82,58 @@ class _QuizPageState extends State<QuizPage> {
       builder: (context) {
         return WillPopScope(
           onWillPop: () async => false,
-          child: AlertDialog(
-            title: title == null ? null : Text(title),
-            content: content == null ? null : Text(content),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  result = true;
-                  Navigator.pop(context);
-                },
-                child: Text(yesText ?? AppLocalizations.of(context)!.yes),
-              ),
-              TextButton(
-                onPressed: () {
-                  result = false;
-                  Navigator.pop(context);
-                },
-                child: Text(AppLocalizations.of(context)!.no),
-              )
-            ],
-          ),
+          child: PopupDialogWidget(
+            title: title ?? "",
+            child: Column(
+              children: [
+                if(content != null) Padding(
+                  padding: const EdgeInsets.only(bottom: 18.0),
+                  child: Text(content),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RoundedButton(
+                      text: yesText ?? AppLocalizations.of(context)!.yes,
+                      onClick: () {
+                        result = true;
+                        Navigator.pop(context);
+                      },
+                    ),
+                    SizedBox(width: 12,),
+                    RoundedButton(
+                      text: yesText ?? AppLocalizations.of(context)!.no,
+                      onClick: () {
+                        result = false;
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                )
+              ],
+            )
+          // AlertDialog(
+          //   title: ,
+          //   content: content == null ? null : Text(content),
+          //   actions: [
+          //     TextButton(
+          //       onPressed: () {
+          //         result = true;
+          //         Navigator.pop(context);
+          //       },
+          //       child: Text(yesText ?? AppLocalizations.of(context)!.yes),
+          //     ),
+          //     TextButton(
+          //       onPressed: () {
+          //         result = false;
+          //         Navigator.pop(context);
+          //       },
+          //       child: Text(AppLocalizations.of(context)!.no),
+          //     )
+          //   ],
+          // ),
+          )
         );
       },
     );

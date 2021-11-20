@@ -7,6 +7,8 @@ import 'package:munich_data_quiz/constants/theme.dart';
 import 'package:munich_data_quiz/model/dummy/dummy_numbers.dart';
 import 'package:munich_data_quiz/view/screen/quiz_page.dart';
 import 'package:munich_data_quiz/view/style/screen/base_titled.dart';
+import 'package:munich_data_quiz/view/widget/button/rounded_button.dart';
+import 'package:munich_data_quiz/view/widget/dialog/popup_dialog_widget.dart';
 import 'package:munich_data_quiz/widgets/image_widget.dart';
 import 'package:munich_data_quiz/widgets/title/titlebar.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -88,9 +90,28 @@ class _TopicPageState extends State<TopicPage> {
                     await showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertDialog(
-                          title: Text(AppLocalizations.of(context)!.error),
-                          content: Text("$err"),
+                        return PopupDialogWidget(
+                            title: AppLocalizations.of(context)!.error,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 18.0),
+                                  child: Text("$err"),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    RoundedButton(
+                                      text: AppLocalizations.of(context)!.okayGotIt,
+                                      onClick: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                )
+                              ],
+                            )
                         );
                       },
                     );

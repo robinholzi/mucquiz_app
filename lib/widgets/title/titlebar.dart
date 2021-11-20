@@ -159,8 +159,6 @@ class BasicTitleBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TitleBarWidget(
-      subtitle: "MucQuiz",
-      subtitleIcon: MdiIcons.trophyAward,
       customTitle: title,
     );
   }

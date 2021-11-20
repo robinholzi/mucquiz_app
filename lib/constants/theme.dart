@@ -165,6 +165,8 @@ class MQTheme {
   static double cardPaddingV = 8.0;
   static double cardPaddingBigV = 18.0;
 
+  static double popupCardVerticalPadding = 24.0;
+
   // ------------------------------------------------------
 
   // margin -----------------------------------------------
@@ -247,28 +249,6 @@ class MQTheme {
   static const _themeColor = Color.fromRGBO(0x3A, 0x88, 0xFF, 1.0);
   static const _secondaryColor = Color.fromRGBO(0x70, 0xA2, 0xFF, 1.0);
 
-  // TODO
-  static ThemeData theme = _baseTheme.copyWith()
-    .copyWith(
-      colorScheme: const ColorScheme.light().copyWith(
-        brightness: Brightness.light,
-        primary: _themeColor,
-        secondary: _secondaryColor,
-        surface: Colors.grey[200],
-      ),
-      cardColor: MQColor.bgColorDark,
-      cardTheme: CardTheme(
-        color: Colors.white70,
-      ),
-      textTheme: Typography.blackHelsinki.copyWith(
-        bodyText2: TextStyle(
-          color: Colors.grey[800],
-          fontSize: 14,
-        ),
-      ),
-    );
-
-  // TODO
   static ThemeData darkTheme = _baseTheme
     .copyWith(
       cardColor: MQColor.bgColorDark,
@@ -282,8 +262,9 @@ class MQTheme {
         ),
       ),
     );
+  static ThemeData theme = darkTheme;
 
-  static RoundedRectangleBorder dialogBoxShape = const RoundedRectangleBorder(
+      static RoundedRectangleBorder dialogBoxShape = const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(radiusCard),
   );
 
