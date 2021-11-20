@@ -24,7 +24,12 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
 
   Widget _answer(BuildContext context, QuizAnswer answer) {
     return CheckboxListTile(
-      title: Text(answer.text ?? ""),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(MQTheme.radiusCard * 2),
+      ),
+      title: Text(
+        answer.text ?? "", style: MQTheme.defaultTextStyle,
+      ),
       onChanged: (newValue) async {
         setState(() {
           widget.selectedAnswers[answer.id] = newValue ?? false;
@@ -36,9 +41,9 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: MQTheme.screenPaddingH),
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: MQTheme.screenPaddingH),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -58,9 +63,12 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
               ),
             ),
             if ((widget.question.description ?? "").isNotEmpty)
-              Text(
-                widget.question.description!,
-                textAlign: TextAlign.center,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 18.0),
+                child: Text(
+                  widget.question.description!,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ...widget.question.answers.map((a) => _answer(context, a))
           ],

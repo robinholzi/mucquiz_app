@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
 import 'package:munich_data_quiz/constants/color.dart';
+import 'package:munich_data_quiz/constants/theme.dart';
 import 'package:munich_data_quiz/view/screen/quiz_result.dart';
 import 'package:munich_data_quiz/view/style/screen/base_titled.dart';
 import 'package:munich_data_quiz/view/widget/button/rounded_button.dart';
@@ -85,10 +86,19 @@ class _QuizPageState extends State<QuizPage> {
           child: PopupDialogWidget(
             title: title ?? "",
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if(content != null) Padding(
-                  padding: const EdgeInsets.only(bottom: 18.0),
-                  child: Text(content),
+                  padding: EdgeInsets.only(
+                    bottom: 18.0,
+                    left: MQTheme.cardPaddingBigV,
+                    right: MQTheme.cardPaddingBigV,
+                  ),
+                  child: Text(
+                    content,
+                    maxLines: 4,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -101,7 +111,7 @@ class _QuizPageState extends State<QuizPage> {
                         Navigator.pop(context);
                       },
                     ),
-                    SizedBox(width: 12,),
+                    const SizedBox(width: 12,),
                     RoundedButton(
                       text: yesText ?? AppLocalizations.of(context)!.no,
                       onClick: () {
@@ -113,26 +123,6 @@ class _QuizPageState extends State<QuizPage> {
                 )
               ],
             )
-          // AlertDialog(
-          //   title: ,
-          //   content: content == null ? null : Text(content),
-          //   actions: [
-          //     TextButton(
-          //       onPressed: () {
-          //         result = true;
-          //         Navigator.pop(context);
-          //       },
-          //       child: Text(yesText ?? AppLocalizations.of(context)!.yes),
-          //     ),
-          //     TextButton(
-          //       onPressed: () {
-          //         result = false;
-          //         Navigator.pop(context);
-          //       },
-          //       child: Text(AppLocalizations.of(context)!.no),
-          //     )
-          //   ],
-          // ),
           )
         );
       },
@@ -221,7 +211,7 @@ class _QuizPageState extends State<QuizPage> {
             ),
             _dotIndicator(),
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.symmetric(vertical: 12.0),
               child: RoundedButton(
                 onClick: () => _quizSubmit(context),
                 text: AppLocalizations.of(context)!.endQuiz,
