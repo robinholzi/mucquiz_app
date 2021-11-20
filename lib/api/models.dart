@@ -15,7 +15,7 @@ class Topic {
     return Topic(
       title: json["title"],
       description: json["description"],
-      imageUrl: json["image_url"],
+      imageUrl: json["img_url"],
       id: json["id"],
     );
   }
