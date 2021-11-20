@@ -1,3 +1,6 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class Topic {
   Topic({
     required this.title,
@@ -5,11 +8,16 @@ class Topic {
     required this.imageUrl,
     required this.id,
   });
+  Topic.random(BuildContext ctx) : imageUrl=null {
+    title = AppLocalizations.of(ctx)!.randomTopic;
+    description = AppLocalizations.of(ctx)!.randomTopicDescr;
+    id = -1;
+  }
 
-  final String title;
-  final String? description;
+  late final String title;
+  late final String? description;
   final String? imageUrl;
-  final int id;
+  late final int id;
 
   factory Topic.fromJson(Map<String, dynamic> json) {
     return Topic(

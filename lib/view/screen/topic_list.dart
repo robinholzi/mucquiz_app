@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
 import 'package:munich_data_quiz/api/quiz_api.dart';
 import 'package:munich_data_quiz/constants/color.dart';
@@ -18,7 +17,7 @@ class TopicListPage extends StatefulWidget {
 
 // TODO check if pull up to load new works
 class _TopicListPageState extends State<TopicListPage> {
-  bool loading = true;
+  bool loading = true, firstBuild = true;
   List<Topic> topics = [];
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -28,6 +27,8 @@ class _TopicListPageState extends State<TopicListPage> {
   Future<void> rebuildCommunityList() async {
     setLoading();
     topics.clear();
+
+    topics.add(Topic.random(context));
 
     var topicsRaw = await QuizAPI().topics().onError((error, stackTrace) {
       _error = error.toString();
@@ -53,7 +54,6 @@ class _TopicListPageState extends State<TopicListPage> {
   @override
   void initState() {
     super.initState();
-    rebuildCommunityList();
   }
 
   void _onRefresh() async {
@@ -68,6 +68,11 @@ class _TopicListPageState extends State<TopicListPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (firstBuild) {
+      rebuildCommunityList();
+      firstBuild = false;
+    }
+
     Widget comList;
 
     if (loading) {

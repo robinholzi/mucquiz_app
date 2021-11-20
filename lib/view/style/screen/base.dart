@@ -38,7 +38,6 @@ class _BaseScreenState extends State<BaseScreen> {
         body: SafeArea(
           child: LayoutBuilder(
             builder: (ctx, cstr) {
-              print("cstr.minWidth: " + (cstr.minWidth.toString()));
               return ChangeNotifierProvider<ScreenSize>.value(
                 value: ScreenSize(
                   minWidth: cstr.minWidth,
