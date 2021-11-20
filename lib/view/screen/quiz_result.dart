@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
 import 'package:munich_data_quiz/api/quiz_api.dart';
 import 'package:munich_data_quiz/constants/theme.dart';
@@ -23,27 +22,24 @@ class _QuizResultPageState extends State<QuizResultPage> {
     fontSize: 24,
     fontWeight: FontWeight.bold,
   );
-
   Widget _answer(
       BuildContext context, QuizAnswer answer, EvaluatedQuestion result) {
-    var userGotitCorrect = true;
-    if (result.incorrectAnswers?.isNotEmpty ?? false) {
-      var answers =
-          result.incorrectAnswers!.where((element) => element.id == answer.id);
+    // Is this answer contained in the incorrect answers?
+    bool userIncorrect = result.incorrectAnswers
+            ?.any((incorrect) => answer.id == incorrect.id) ??
+        false;
 
-      userGotitCorrect =
-          answers.isNotEmpty ? answers.first.correct ?? false : false;
-    }
+    QuizSubmission submitted = widget.submission
+        .firstWhere((question) => question.questionId == result.questionId);
+
+    bool selectedByUser = submitted.chosenAnswerIds.contains(answer.id);
 
     return CheckboxListTile(
       title: Text(
         answer.text ?? "",
-        style: TextStyle(
-          decoration: TextDecoration.lineThrough,
-        ),
       ),
-      tileColor: userGotitCorrect ? Colors.green : Colors.red,
-      value: result.answerCorrect ?? false,
+      tileColor: userIncorrect ? Colors.red : Colors.green,
+      value: selectedByUser,
       onChanged: null,
     );
   }
@@ -62,8 +58,7 @@ class _QuizResultPageState extends State<QuizResultPage> {
             ),
           Padding(
             padding: EdgeInsets.only(
-                top: MQTheme.cardPaddingBigV,
-                bottom: MQTheme.cardPaddingBigV),
+                top: MQTheme.cardPaddingBigV, bottom: MQTheme.cardPaddingBigV),
             child: Text(
               question.title,
               style: titleStyle,
@@ -75,7 +70,12 @@ class _QuizResultPageState extends State<QuizResultPage> {
               question.description!,
               textAlign: TextAlign.center,
             ),
-          ...question.answers.map((a) => _answer(context, a, result))
+          ...question.answers.map((a) => _answer(context, a, result)),
+          if ((result.answerDetail ?? "").isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(result.answerDetail!),
+            )
         ],
       ),
     );
@@ -99,11 +99,7 @@ class _QuizResultPageState extends State<QuizResultPage> {
   Widget build(BuildContext context) {
     return BaseScreenTitled(
       titleBar: BasicTitleBar(
-        title: (
-            (widget.quiz.topic != null)
-                ? (widget.quiz.topic!.title ?? "")
-                : ""
-        ),
+        title: ((widget.quiz.topic != null) ? (widget.quiz.topic!.title) : ""),
       ),
       child: Container(
         alignment: Alignment.center,
