@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:munich_data_quiz/constants/color.dart';
 import 'package:munich_data_quiz/pages/topic_list.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: MQColor.systemNavBar,
+    systemNavigationBarIconBrightness: MQColor.systemNavBarBrightness,
+    statusBarColor: MQColor.bgColorLight,
+  ));
+
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   runApp(const MunichDataQuizApp());
 }
 

@@ -59,7 +59,9 @@ android {
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : file(System.env.X_KEYSTORE_PATH)
+            storeFile keystoreProperties['storeFile']
+                    ? file(keystoreProperties['storeFile'])
+                    : file(System.env.X_KEYSTORE_PATH)
             storePassword keystoreProperties['storePassword']
         }
     }
