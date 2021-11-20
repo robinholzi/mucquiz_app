@@ -23,12 +23,13 @@ class _QuizResultPageState extends State<QuizResultPage> {
 
   Widget _answer(
       BuildContext context, QuizAnswer answer, EvaluatedQuestion result) {
-    var isCorrect = false;
+    var userGotitCorrect = true;
     if (result.incorrectAnswers?.isNotEmpty ?? false) {
       var answers =
           result.incorrectAnswers!.where((element) => element.id == answer.id);
 
-      isCorrect = answers.isNotEmpty ? answers.first.correct ?? false : false;
+      userGotitCorrect =
+          answers.isNotEmpty ? answers.first.correct ?? false : false;
     }
 
     return CheckboxListTile(
@@ -38,7 +39,8 @@ class _QuizResultPageState extends State<QuizResultPage> {
           decoration: TextDecoration.lineThrough,
         ),
       ),
-      value: isCorrect,
+      tileColor: userGotitCorrect ? Colors.green : Colors.red,
+      value: result.answerCorrect ?? false,
       onChanged: null,
     );
   }
@@ -90,7 +92,7 @@ class _QuizResultPageState extends State<QuizResultPage> {
       ),
       body: Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: FutureBuilder<QuizSubmissionResponse>(
           future: QuizAPI().evaluateQuizTotal(widget.submission),
           builder: (context, snapshot) {
