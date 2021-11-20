@@ -29,7 +29,10 @@ class QuizAPI extends APIClient {
   }
 
   Future<List<Topic>> topics() async {
-    var uri = _endpoint("/topic/list", {});
+    var uri = _endpoint("/topic/list", {
+      // TODO: Make sure this is always more than we have quizzes
+      "page_size": "100"
+    });
 
     var list = await _fetchJSON(uri) as List<dynamic>;
 
