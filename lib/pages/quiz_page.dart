@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
 import 'package:munich_data_quiz/widgets/quiz_question.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
@@ -52,19 +53,58 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
+  // Ask the user before leaving the quiz if they are sure
+  Future<bool> _beforeQuizLeave(BuildContext context) async {
+    bool result = true;
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: AlertDialog(
+            title: Text(AppLocalizations.of(context)!.cancelQuiz),
+            content: Text(
+              AppLocalizations.of(context)!.cancelQuizDescription,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  result = true;
+                  Navigator.pop(context);
+                },
+                child: Text(AppLocalizations.of(context)!.yesCancel),
+              ),
+              TextButton(
+                onPressed: () {
+                  result = false;
+                  Navigator.pop(context);
+                },
+                child: Text(AppLocalizations.of(context)!.no),
+              )
+            ],
+          ),
+        );
+      },
+    );
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.topic.title),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: _questionView(),
-          ),
-          _dotIndicator(),
-        ],
+    return WillPopScope(
+      onWillPop: () => _beforeQuizLeave(context),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.topic.title),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: _questionView(),
+            ),
+            _dotIndicator(),
+          ],
+        ),
       ),
     );
   }

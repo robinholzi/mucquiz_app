@@ -1,5 +1,9 @@
 {
     "appTitle": "München Daten Quiz",
     "startQuiz": "Quiz starten",
-    "unknown": "Unbekannt"
+    "unknown": "Unbekannt",
+    "cancelQuiz": "Quiz abbrechen?",
+    "cancelQuizDescription": "Das Quiz wird abgebrochen, es werden keine Ergebnisse gespeichert.",
+    "yesCancel": "Ja, abbrechen",
+    "no": "Nein"
 }

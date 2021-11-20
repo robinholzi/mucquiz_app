@@ -55,7 +55,7 @@ class _TopicPageState extends State<TopicPage> {
               controller: _btnController,
               onPressed: () async {
                 // TODO: Load data
-                await Future.delayed(const Duration(seconds: 2));
+                await Future.delayed(const Duration(seconds: 1));
 
                 var quiz = GeneratedQuiz(
                   topic: widget.topic,
@@ -97,7 +97,7 @@ class _TopicPageState extends State<TopicPage> {
                 } catch (_) {}
 
                 await Future.delayed(
-                  const Duration(seconds: 2),
+                  const Duration(seconds: 1),
                   () => _btnController.reset(),
                 );
               },

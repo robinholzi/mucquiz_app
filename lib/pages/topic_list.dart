@@ -53,7 +53,7 @@ class _TopicListPageState extends State<TopicListPage> {
   Widget build(BuildContext context) {
     return Center(
       child: FutureBuilder<List<Topic>>(
-        future: Future.delayed(const Duration(seconds: 2), getDummyTopics),
+        future: Future.delayed(const Duration(seconds: 1), getDummyTopics),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) {
             return ErrorWidget(snapshot.error!);
