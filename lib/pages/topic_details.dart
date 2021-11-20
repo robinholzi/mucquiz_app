@@ -23,7 +23,7 @@ class _TopicPageState extends State<TopicPage> {
       appBar: AppBar(
         title: Text(widget.topic.title),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             ImageWidget(

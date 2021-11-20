@@ -37,26 +37,28 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            widget.question.title,
-            style: titleStyle,
-            textAlign: TextAlign.center,
-          ),
-          if ((widget.question.imgUrl ?? "").isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ImageWidget(widget.question.imgUrl!),
-            ),
-          if ((widget.question.description ?? "").isNotEmpty)
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
             Text(
-              widget.question.description!,
+              widget.question.title,
+              style: titleStyle,
               textAlign: TextAlign.center,
             ),
-          ...widget.question.answers.map((a) => _answer(context, a))
-        ],
+            if ((widget.question.imgUrl ?? "").isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ImageWidget(widget.question.imgUrl!),
+              ),
+            if ((widget.question.description ?? "").isNotEmpty)
+              Text(
+                widget.question.description!,
+                textAlign: TextAlign.center,
+              ),
+            ...widget.question.answers.map((a) => _answer(context, a))
+          ],
+        ),
       ),
     );
   }
