@@ -75,7 +75,7 @@ class _QuizResultPageState extends State<QuizResultPage> {
             padding: EdgeInsets.only(
                 top: MQTheme.cardPaddingBigV, bottom: MQTheme.cardPaddingBigV),
             child: Text(
-              question.title,
+              question.text,
               style: titleStyle,
               textAlign: TextAlign.center,
             ),

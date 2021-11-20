@@ -44,14 +44,14 @@ class GeneratedQuiz {
 class QuizQuestion {
   QuizQuestion({
     required this.id,
-    required this.title,
+    required this.text,
     required this.description,
     required this.imgUrl,
     required this.answers,
   });
 
   final int id;
-  final String title;
+  final String text;
   final String? description;
   final String? imgUrl;
   final List<QuizAnswer> answers;
@@ -59,7 +59,7 @@ class QuizQuestion {
   factory QuizQuestion.fromJson(Map<String, dynamic> json) {
     return QuizQuestion(
       id: json["id"],
-      title: json["title"],
+      text: json["text"],
       description: json["description"],
       imgUrl: json["img_url"],
       answers: json["answers"] == null

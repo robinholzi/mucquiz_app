@@ -28,7 +28,8 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
         borderRadius: BorderRadius.all(MQTheme.radiusCard * 2),
       ),
       title: Text(
-        answer.text ?? "", style: MQTheme.defaultTextStyle,
+        answer.text ?? "",
+        style: MQTheme.defaultTextStyle,
       ),
       onChanged: (newValue) async {
         setState(() {
@@ -55,9 +56,10 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
             Padding(
               padding: EdgeInsets.only(
                 top: MQTheme.cardPaddingBigV,
-                bottom: MQTheme.cardPaddingV),
+                bottom: MQTheme.cardPaddingV,
+              ),
               child: Text(
-                widget.question.title,
+                widget.question.text,
                 style: titleStyle,
                 textAlign: TextAlign.center,
               ),
