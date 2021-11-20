@@ -201,7 +201,9 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return BaseScreenTitled(
-      titleBar: BasicTitleBar(title: widget.topic.title,),
+      titleBar: BasicTitleBar(
+        title: (widget.quiz.topic ?? widget.topic).title,
+      ),
       child: WillPopScope(
         onWillPop: () => _beforeQuizLeave(context),
         child: Column(
