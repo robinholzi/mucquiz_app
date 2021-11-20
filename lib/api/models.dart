@@ -86,3 +86,90 @@ class QuizAnswer {
     );
   }
 }
+
+class QuizSubmission {
+  QuizSubmission({
+    required this.questionId,
+    required this.chosenAnswerIds,
+  });
+
+  int questionId;
+  List<int> chosenAnswerIds;
+
+  Map<String, dynamic> toJson() => {
+        "question_id": questionId,
+        "chosen_answer_ids": List<dynamic>.from(chosenAnswerIds.map((x) => x)),
+      };
+}
+
+class QuizSubmissionResponse {
+  QuizSubmissionResponse({
+    required this.code,
+    required this.title,
+    required this.message,
+    required this.data,
+  });
+
+  final int? code;
+  final String? title;
+  final String? message;
+  final List<EvaluatedQuestion>? data;
+
+  factory QuizSubmissionResponse.fromJson(Map<String, dynamic> json) {
+    return QuizSubmissionResponse(
+      code: json["code"],
+      title: json["title"],
+      message: json["message"],
+      data: json["data"] == null
+          ? null
+          : List<EvaluatedQuestion>.from(
+              json["data"].map((x) => EvaluatedQuestion.fromJson(x))),
+    );
+  }
+}
+
+class EvaluatedQuestion {
+  EvaluatedQuestion({
+    required this.questionId,
+    required this.answerCorrect,
+    required this.incorrectAnswers,
+    required this.answerDetail,
+  });
+
+  final int questionId;
+  final bool? answerCorrect;
+  final List<IncorrectAnswer>? incorrectAnswers;
+  final String? answerDetail;
+
+  factory EvaluatedQuestion.fromJson(Map<String, dynamic> json) {
+    return EvaluatedQuestion(
+      questionId: json["question_id"],
+      answerCorrect: json["answer_correct"],
+      incorrectAnswers: json["incorrect_answers"] == null
+          ? null
+          : List<IncorrectAnswer>.from(json["incorrect_answers"]
+              .map((x) => IncorrectAnswer.fromJson(x))),
+      answerDetail: json["answer_detail"],
+    );
+  }
+}
+
+class IncorrectAnswer {
+  IncorrectAnswer({
+    required this.id,
+    required this.text,
+    required this.correct,
+  });
+
+  final int id;
+  final String? text;
+  final bool? correct;
+
+  factory IncorrectAnswer.fromJson(Map<String, dynamic> json) {
+    return IncorrectAnswer(
+      id: json["id"],
+      text: json["text"],
+      correct: json["correct"],
+    );
+  }
+}

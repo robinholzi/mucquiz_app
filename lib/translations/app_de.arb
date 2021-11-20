@@ -20,5 +20,6 @@
                 "example": "2"
             }
         }
-    }
+    },
+    "resultPageTitle": "Ergebnis"
 }

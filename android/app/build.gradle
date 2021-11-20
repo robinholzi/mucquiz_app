@@ -70,13 +70,13 @@ android {
         debug {
             applicationIdSuffix ".debug"
             versionNameSuffix "-dev"
-            manifestPlaceholders = [ applicationLabel: "Munich Quiz (debug)" ]
+            manifestPlaceholders = [ applicationLabel: "MucQuiz (debug)" ]
 
             debuggable true
             signingConfig signingConfigs.debug
         }
         release {
-            manifestPlaceholders = [ applicationLabel: "Munich Quiz" ]
+            manifestPlaceholders = [ applicationLabel: "MucQuiz" ]
 
             signingConfig signingConfigs.release
             shrinkResources true
