@@ -41,52 +41,49 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
-  Positioned _dotIndicator() {
-    return Positioned(
-      left: 0.0,
-      right: 0.0,
-      bottom: 0.0,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: CirclePageIndicator(
-          size: 24,
-          selectedSize: 24,
-          onPageSelected: (i) {
-            if (_currentPageNotifier.value != i) {
-              _pageController.animateToPage(
-                i,
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
-              );
-            }
-          },
-          itemCount: widget.quiz.questions.length,
-          currentPageNotifier: _currentPageNotifier,
-        ),
+  Widget _dotIndicator() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CirclePageIndicator(
+        size: 24,
+        selectedSize: 24,
+        onPageSelected: (i) {
+          if (_currentPageNotifier.value != i) {
+            _pageController.animateToPage(
+              i,
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+            );
+          }
+        },
+        itemCount: widget.quiz.questions.length,
+        currentPageNotifier: _currentPageNotifier,
       ),
     );
   }
 
-  // Ask the user before leaving the quiz if they are sure
-  Future<bool> _beforeQuizLeave(BuildContext context) async {
+  Future<bool> _yesNoDialog(
+    BuildContext dialogContext, {
+    String? title,
+    String? content,
+    String? yesText,
+  }) async {
     bool result = true;
     await showDialog(
-      context: context,
+      context: dialogContext,
       builder: (context) {
         return WillPopScope(
           onWillPop: () async => false,
           child: AlertDialog(
-            title: Text(AppLocalizations.of(context)!.cancelQuiz),
-            content: Text(
-              AppLocalizations.of(context)!.cancelQuizDescription,
-            ),
+            title: title == null ? null : Text(title),
+            content: content == null ? null : Text(content),
             actions: [
               TextButton(
                 onPressed: () {
                   result = true;
                   Navigator.pop(context);
                 },
-                child: Text(AppLocalizations.of(context)!.yesCancel),
+                child: Text(yesText ?? AppLocalizations.of(context)!.yes),
               ),
               TextButton(
                 onPressed: () {
@@ -103,6 +100,32 @@ class _QuizPageState extends State<QuizPage> {
     return result;
   }
 
+  // Ask the user before leaving the quiz if they are sure
+  Future<bool> _beforeQuizLeave(BuildContext context) async {
+    return _yesNoDialog(
+      context,
+      title: AppLocalizations.of(context)!.cancelQuiz,
+      content: AppLocalizations.of(context)!.cancelQuizDescription,
+      yesText: AppLocalizations.of(context)!.yesCancel,
+    );
+  }
+
+  Future<void> _quizSubmit(BuildContext context) async {
+    var shouldSubmit = await _yesNoDialog(
+      context,
+      title: AppLocalizations.of(context)!.endQuizDialogTitle,
+      content: AppLocalizations.of(context)!.endQuizDialogContent,
+    );
+    if (!shouldSubmit) {
+      return;
+    }
+
+    // TODO: Display result screen.
+    // Navigator.of(context).pushReplacement(newRoute)
+
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -117,6 +140,22 @@ class _QuizPageState extends State<QuizPage> {
               child: _questionView(),
             ),
             _dotIndicator(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: OutlinedButton(
+                onPressed: () => _quizSubmit(context),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    AppLocalizations.of(context)!.endQuiz,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
