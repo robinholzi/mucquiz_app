@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
 import 'package:munich_data_quiz/api/quiz_api.dart';
 import 'package:munich_data_quiz/constants/color.dart';
@@ -17,11 +18,10 @@ class TopicListPage extends StatefulWidget {
 
 // TODO check if pull up to load new works
 class _TopicListPageState extends State<TopicListPage> {
-
   bool loading = true;
   List<Topic> topics = [];
-  RefreshController _refreshController = RefreshController(
-      initialRefresh: false);
+  final RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
   String _error = "";
 
@@ -36,7 +36,8 @@ class _TopicListPageState extends State<TopicListPage> {
 
     for (Topic newTopicsRaw in topicsRaw) {
       var find = topics.where((element) => element.id == newTopicsRaw.id);
-      if (find.isEmpty) { // topic not yet present
+      if (find.isEmpty) {
+        // topic not yet present
         topics.add(newTopicsRaw);
       }
     }
@@ -55,14 +56,13 @@ class _TopicListPageState extends State<TopicListPage> {
     rebuildCommunityList();
   }
 
-  void _onRefresh() async{
+  void _onRefresh() async {
     rebuildCommunityList();
     _refreshController.refreshCompleted();
   }
 
-  void _onLoading() async{
-    if(mounted)
-      setState(() {});
+  void _onLoading() async {
+    if (mounted) setState(() {});
     _refreshController.loadComplete();
   }
 
@@ -84,14 +84,13 @@ class _TopicListPageState extends State<TopicListPage> {
     } else {
       if (topics.isEmpty) {
         comList = Padding(
-          padding: EdgeInsets.symmetric(vertical: 34,
-              horizontal: MQTheme.screenPaddingH
-          ),
+          padding: EdgeInsets.symmetric(
+              vertical: 34, horizontal: MQTheme.screenPaddingH),
           child: Column(
             children: [
               InfoCard(
                 cardColor: MQColor.primaryColor,
-                text: "No topics found.",
+                text: AppLocalizations.of(context)!.noTopicsFound,
               ),
             ],
           ),
@@ -117,14 +116,14 @@ class _TopicListPageState extends State<TopicListPage> {
       children: [
         Expanded(
           child: SmartRefresher(
-              enablePullDown: true,
-              enablePullUp: true,
-              header: MaterialClassicHeader(), // WaterDropHeader
-              footer: ClassicFooter(),
-              controller: _refreshController,
-              onRefresh: _onRefresh,
-              onLoading: _onLoading,
-              child: comList
+            enablePullDown: true,
+            enablePullUp: true,
+            header: MaterialClassicHeader(), // WaterDropHeader
+            footer: ClassicFooter(),
+            controller: _refreshController,
+            onRefresh: _onRefresh,
+            onLoading: _onLoading,
+            child: comList,
           ),
         ),
       ],
