@@ -95,8 +95,16 @@ class _TopicPageState extends State<TopicPage> {
                             child: Column(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(bottom: 18.0),
-                                  child: Text("$err"),
+                                  padding: EdgeInsets.only(
+                                    bottom: 18.0,
+                                    left: MQTheme.cardPaddingBigV,
+                                    right: MQTheme.cardPaddingBigV,
+                                  ),
+                                  child: Text(
+                                    "$err",
+                                    maxLines: 4,
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
