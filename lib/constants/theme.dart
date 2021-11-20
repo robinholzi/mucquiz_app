@@ -259,22 +259,21 @@ class MQTheme {
     );
 
   // TODO
-  static ThemeData darkTheme = _baseTheme;
-    //   .copyWith()
-    // .copyWith(
-    //   colorScheme: const ColorScheme.dark().copyWith(
-    //     brightness: Brightness.dark,
-    //     primary: _themeColor,
-    //     secondary: _secondaryColor,
-    //     surface: Colors.grey[900],
-    //   ),
-    //   textTheme: Typography.whiteHelsinki.copyWith(
-    //     bodyText2: TextStyle(
-    //       color: Colors.grey[200],
-    //       fontSize: 14,
-    //     ),
-    //   ),
-    // );
+  static ThemeData darkTheme = _baseTheme
+    .copyWith(
+      colorScheme: const ColorScheme.dark().copyWith(
+        brightness: Brightness.dark,
+        primary: _themeColor,
+        secondary: _secondaryColor,
+        surface: Colors.grey[900],
+      ),
+      textTheme: Typography.whiteHelsinki.copyWith(
+        bodyText2: TextStyle(
+          color: Colors.grey[200],
+          fontSize: 14,
+        ),
+      ),
+    );
 
   static RoundedRectangleBorder dialogBoxShape = const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(radiusCard),

@@ -49,7 +49,7 @@ android {
 
     defaultConfig {
         applicationId "com.hackatum.quiz"
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

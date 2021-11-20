@@ -13,7 +13,7 @@ import 'package:munich_data_quiz/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MunichDataQuizApp());
+    await tester.pumpWidget(const RootApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

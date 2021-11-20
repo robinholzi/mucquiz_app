@@ -25,7 +25,7 @@ class _TopicListPageState extends State<TopicListPage> {
           },
         );
       },
-      // Preload images for the next 2 screens
+      // Preload images for the next 2 screen
       cacheExtent: MediaQuery.of(context).size.height * 2,
     );
   }
