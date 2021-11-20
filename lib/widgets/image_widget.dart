@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:munich_data_quiz/model/dummy/dummy_assets.dart';
 
 class ImageWidget extends StatefulWidget {
   const ImageWidget(this.imageURL, {this.heroTag, this.id, Key? key})
@@ -45,23 +46,23 @@ class _ImageWidgetState extends State<ImageWidget>
   }
 
   Widget _defaultImage() {
-    return Image.asset("assets/error.png");
+    return Image.asset(DummyAssets.randMunichImage);
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    final launchImage = _image(context, widget.imageURL);
+    final image = _image(context, widget.imageURL);
 
     // This prevents having multiple "unknown-unknown" hero tags, which crash the app
     if (widget.heroTag == null || widget.id == null) {
-      return launchImage;
+      return image;
     }
 
     return Hero(
       tag: (widget.heroTag ?? "unknown") + "-" + (widget.id ?? "unknown"),
-      child: launchImage,
+      child: image,
     );
   }
 }
