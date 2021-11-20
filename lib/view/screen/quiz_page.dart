@@ -113,7 +113,7 @@ class _QuizPageState extends State<QuizPage> {
                     ),
                     const SizedBox(width: 12,),
                     RoundedButton(
-                      text: yesText ?? AppLocalizations.of(context)!.no,
+                      text: AppLocalizations.of(context)!.no,
                       onClick: () {
                         result = false;
                         Navigator.pop(context);
@@ -136,7 +136,7 @@ class _QuizPageState extends State<QuizPage> {
       context,
       title: AppLocalizations.of(context)!.cancelQuiz,
       content: AppLocalizations.of(context)!.cancelQuizDescription,
-      yesText: AppLocalizations.of(context)!.yesCancel,
+      yesText: AppLocalizations.of(context)!.yes,
     );
   }
 
