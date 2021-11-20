@@ -42,7 +42,6 @@ class _TopicWidgetState extends State<TopicWidget> {
             borderRadius: const BorderRadius.all(MQTheme.radiusCard),
             onTap: () async {
               setState(() {});
-
               widget.onTap?.call();
             },
             child: Container(

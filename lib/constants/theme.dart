@@ -163,6 +163,7 @@ class MQTheme {
   static const double screenPaddingHButton =
       screenPaddingH - buttonSplashPadding;
   static double cardPaddingV = 8.0;
+  static double cardPaddingBigV = 18.0;
 
   // ------------------------------------------------------
 
