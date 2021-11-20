@@ -2,11 +2,11 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-DeimosisDb mqDb = DeimosisDb();
+MQDb mqDb = MQDb();
 
 class DatabaseError {}
 
-class DeimosisDb {
+class MQDb {
 
   bool _initialized = false;
 

@@ -156,8 +156,13 @@ class MQTheme {
 
   // paddings ---------------------------------------------
 
+  static const double buttonSplashPadding = 4;
 
-  static double inputFieldPaddings = 16.0;
+  static const double inputFieldPaddings = 16.0;
+  static const double screenPaddingH = 18.0;
+  static const double screenPaddingHButton =
+      screenPaddingH - buttonSplashPadding;
+  static double cardPaddingV = 8.0;
 
   // ------------------------------------------------------
 
@@ -250,6 +255,10 @@ class MQTheme {
         secondary: _secondaryColor,
         surface: Colors.grey[200],
       ),
+      cardColor: MQColor.bgColorDark,
+      cardTheme: CardTheme(
+        color: Colors.white70,
+      ),
       textTheme: Typography.blackHelsinki.copyWith(
         bodyText2: TextStyle(
           color: Colors.grey[800],
@@ -261,11 +270,9 @@ class MQTheme {
   // TODO
   static ThemeData darkTheme = _baseTheme
     .copyWith(
-      colorScheme: const ColorScheme.dark().copyWith(
-        brightness: Brightness.dark,
-        primary: _themeColor,
-        secondary: _secondaryColor,
-        surface: Colors.grey[900],
+      cardColor: MQColor.bgColorDark,
+      cardTheme: CardTheme(
+        color: MQColor.bgColorDark,
       ),
       textTheme: Typography.whiteHelsinki.copyWith(
         bodyText2: TextStyle(

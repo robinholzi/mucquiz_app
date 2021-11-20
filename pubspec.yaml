@@ -49,6 +49,7 @@ dependencies:
   flutter_launcher_icons: "^0.9.1"
   fluttertoast: ^8.0.8
 
+  url_launcher: ^6.0.14
   sqflite:
   shared_preferences: ^2.0.6
   flutter_secure_storage: ^4.2.1

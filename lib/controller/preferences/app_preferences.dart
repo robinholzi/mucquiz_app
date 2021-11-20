@@ -3,14 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-DeimosisPreferences mqPreferences = DeimosisPreferences();
+MQPreferences mqPreferences = MQPreferences();
 
 class InvalidCredentialsError extends Error {}
 class InvalidEncryptStateError extends Error {}
 
-class DeimosisPreferences {
+class MQPreferences {
 
-  DeimosisPreferences();
+  MQPreferences();
 
   bool _initialized = false;
   SharedPreferences? _sp;
@@ -65,7 +65,7 @@ class DeimosisPreferences {
   Future<void> resetApp() async {
     // example: await _deleteLanguagePrefsDone();
 
-    mqPreferences = DeimosisPreferences(); // reset
+    mqPreferences = MQPreferences(); // reset
   }
 
   /// ENCR HELPERS -------------------------------------------------------------

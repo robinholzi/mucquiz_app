@@ -19,8 +19,8 @@ class StateHandler extends ChangeNotifier {
 
   // Future<void> resetAndInit(LanguageStateHandler languageStateHandler) async {
   //   transitionTo(SetupState.INITIALIZATION);
-  //   await deimosisPreferences.resetApp();
-  //   await deimosisDb.resetApp();
+  //   await mqPreferences.resetApp();
+  //   await mqDb.resetApp();
   //   await initializeAppPreUnlock(languageStateHandler);
   // }
 
@@ -34,10 +34,7 @@ class StateHandler extends ChangeNotifier {
 
     // TODO check shared prefs integrity before launching feed
 
-    // TODO remove wait
-    await Future.delayed(const Duration(seconds: 2));
-
-    // await languageStateHandler.setLanguage(deimosisPreferences.language);
+    // await languageStateHandler.setLanguage(mqPreferences.language);
 
     transitionTo(AppState.LANDING_HOME);
   }
