@@ -90,6 +90,17 @@ class _TopicPageState extends State<TopicPage> {
                         QuizAnswer(id: 4, text: "Lorem ipsum dolor sit amet"),
                       ],
                     ),
+                    QuizQuestion(
+                      id: 3,
+                      title: "Does this question have any images?",
+                      // description: "Zahlen kann man typischerweise Addieren.",
+                      description: "No images to be seen",
+                      imgUrl: null,
+                      answers: [
+                        QuizAnswer(id: 3, text: "😂👍"),
+                        QuizAnswer(id: 1, text: "Lorem amet sönderzäichen"),
+                      ],
+                    ),
                   ],
                 );
 

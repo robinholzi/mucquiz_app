@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:munich_data_quiz/api/models.dart';
+import 'package:munich_data_quiz/widgets/image_widget.dart';
 
 class QuizQuestionWidget extends StatefulWidget {
   const QuizQuestionWidget(this.question, this.selectedAnswers, {Key? key})
@@ -44,6 +45,11 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
             style: titleStyle,
             textAlign: TextAlign.center,
           ),
+          if ((widget.question.imgUrl ?? "").isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ImageWidget(widget.question.imgUrl!),
+            ),
           if ((widget.question.description ?? "").isNotEmpty)
             Text(
               widget.question.description!,
