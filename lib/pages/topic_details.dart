@@ -62,8 +62,10 @@ class _TopicPageState extends State<TopicPage> {
                   questions: [
                     QuizQuestion(
                       id: 1,
-                      title: "Was ist 3+3?",
-                      description: "Zahlen kann man typischerweise Addieren.",
+                      title:
+                          "Was ist wenn wir einfach eine echt lange Frage hätten, die definitiv mehrere Zeilen braucht?",
+                      // description: "Zahlen kann man typischerweise Addieren.",
+                      description: null,
                       imgUrl: "https://via.placeholder.com/350x150",
                       answers: [
                         QuizAnswer(id: 4, text: "Lorem ipsum dolor sit amet"),
@@ -81,7 +83,10 @@ class _TopicPageState extends State<TopicPage> {
                       answers: [
                         QuizAnswer(id: 3, text: "😂👍"),
                         QuizAnswer(id: 1, text: "Lorem amet sönderzäichen"),
-                        QuizAnswer(id: 2, text: " ipsum dolor sit"),
+                        QuizAnswer(
+                            id: 2,
+                            text:
+                                "Diese Antwort ist etwas länger. Mal schauen, wie das auf dem UI aussieht."),
                         QuizAnswer(id: 4, text: "Lorem ipsum dolor sit amet"),
                       ],
                     ),

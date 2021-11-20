@@ -5,10 +5,17 @@ import 'package:munich_data_quiz/widgets/quiz_question.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 
 class QuizPage extends StatefulWidget {
-  const QuizPage(this.topic, this.quiz, {Key? key}) : super(key: key);
+  QuizPage(this.topic, this.quiz, {Key? key})
+      // We need to generate a *unique* map for each question answer (List.fill would reuse the same map)
+      : selectedAnswers = List.generate(quiz.questions.length, (_) => {}),
+        super(key: key);
 
   final Topic topic;
   final GeneratedQuiz quiz;
+
+  // At list index 0, all answer selections for question 0 are saved.
+  // The map<int, bool> maps the answer id to a selection (boolean).
+  final List<Map<int, bool>> selectedAnswers;
 
   @override
   _QuizPageState createState() => _QuizPageState();
@@ -23,7 +30,10 @@ class _QuizPageState extends State<QuizPage> {
       itemCount: widget.quiz.questions.length,
       controller: _pageController,
       itemBuilder: (BuildContext context, int index) {
-        return QuizQuestionWidget(widget.quiz.questions[index]);
+        return QuizQuestionWidget(
+          widget.quiz.questions[index],
+          widget.selectedAnswers[index],
+        );
       },
       onPageChanged: (int index) {
         _currentPageNotifier.value = index;
@@ -43,7 +53,11 @@ class _QuizPageState extends State<QuizPage> {
           selectedSize: 24,
           onPageSelected: (i) {
             if (_currentPageNotifier.value != i) {
-              _pageController.jumpToPage(i);
+              _pageController.animateToPage(
+                i,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+              );
             }
           },
           itemCount: widget.quiz.questions.length,
