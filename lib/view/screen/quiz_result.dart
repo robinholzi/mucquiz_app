@@ -25,17 +25,20 @@ class _QuizResultPageState extends State<QuizResultPage> {
     fontSize: 24,
     fontWeight: FontWeight.bold,
   );
-  Widget _answer(BuildContext context, QuizAnswer answer,
-      EvaluatedQuestion result) {
-    // Is this answer contained in the incorrect answers?
-    bool userIncorrect = result.incorrectAnswers
-            ?.any((incorrect) => answer.id == incorrect.id) ??
-        false;
-
+  Widget _answer(
+      BuildContext context, QuizAnswer answer, EvaluatedQuestion result) {
+    // Find the submitted question
     QuizSubmission submitted = widget.submission
         .firstWhere((question) => question.questionId == result.questionId);
 
+    // Is this answer contained in the incorrect answers?
+    bool answerIncorrect = result.incorrectAnswers
+            ?.any((incorrect) => answer.id == incorrect.id) ??
+        false;
+
     bool selectedByUser = submitted.chosenAnswerIds.contains(answer.id);
+
+    bool green = selectedByUser != answerIncorrect;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
@@ -44,18 +47,20 @@ class _QuizResultPageState extends State<QuizResultPage> {
           borderRadius: BorderRadius.all(MQTheme.radiusCard * 2),
         ),
         title: Text(
-          answer.text ?? "", style: MQTheme.defaultTextStyle,
+          answer.text ?? "",
+          style: MQTheme.defaultTextStyle,
         ),
-        tileColor: userIncorrect ? Colors.redAccent : Colors.green[300],
+        tileColor: green ? Colors.green[300] : Colors.redAccent,
         value: selectedByUser,
         onChanged: null,
       ),
     );
   }
 
-  Widget _singleQuestionResult(BuildContext ctx,
-      QuizQuestion question, EvaluatedQuestion result, bool isLast) {
-    double maxWidth = Provider.of<ScreenSize>(ctx, listen: false).maxWidth * 0.18;
+  Widget _singleQuestionResult(BuildContext ctx, QuizQuestion question,
+      EvaluatedQuestion result, bool isLast) {
+    double maxWidth =
+        Provider.of<ScreenSize>(ctx, listen: false).maxWidth * 0.18;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: MQTheme.screenPaddingH),
       child: Column(
@@ -86,24 +91,27 @@ class _QuizResultPageState extends State<QuizResultPage> {
           ...question.answers.map((a) => _answer(context, a, result)),
           if ((result.answerDetail ?? "").isNotEmpty)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
-              child: Text(result.answerDetail ?? "",
-                style: MQTheme.defaultTextStyle, textAlign: TextAlign.center,),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+              child: Text(
+                result.answerDetail ?? "",
+                style: MQTheme.defaultTextStyle,
+                textAlign: TextAlign.center,
+              ),
             ),
           if (!isLast)
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 14.0,
-                      bottom: MQTheme.cardPaddingBigV * 3.14159),
+                  padding: EdgeInsets.only(
+                      top: 14.0, bottom: MQTheme.cardPaddingBigV * 3.14159),
                   child: Container(
                     width: maxWidth,
                     height: 3,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(3),
-                        color: MQColor.primaryColor
-                    ),
+                        color: MQColor.primaryColor),
                   ),
                 )
               ],
@@ -118,13 +126,13 @@ class _QuizResultPageState extends State<QuizResultPage> {
       itemCount: widget.quiz.questions.length,
       itemBuilder: (BuildContext context, int index) {
         return _singleQuestionResult(
-          ctx,
-          widget.quiz.questions[index],
-          response.data!.firstWhere(
-            (element) => element.questionId == widget.quiz.questions[index].id,
-          ),
-          widget.quiz.questions.length-1 == index
-        );
+            ctx,
+            widget.quiz.questions[index],
+            response.data!.firstWhere(
+              (element) =>
+                  element.questionId == widget.quiz.questions[index].id,
+            ),
+            widget.quiz.questions.length - 1 == index);
       },
     );
   }
