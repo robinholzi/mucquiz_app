@@ -3,10 +3,8 @@ import 'package:munich_data_quiz/api/models.dart';
 import 'package:munich_data_quiz/api/quiz_api.dart';
 import 'package:munich_data_quiz/constants/color.dart';
 import 'package:munich_data_quiz/constants/theme.dart';
-import 'package:munich_data_quiz/pages/topic_details.dart';
+import 'package:munich_data_quiz/view/screen/topic_details.dart';
 import 'package:munich_data_quiz/view/widget/card/notification_single_line_card.dart';
-import 'package:munich_data_quiz/view/widget/padding/screen_padding.dart';
-import 'package:munich_data_quiz/widgets/title/titlebar.dart';
 import 'package:munich_data_quiz/widgets/topic.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 

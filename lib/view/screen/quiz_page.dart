@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
-import 'package:munich_data_quiz/pages/quiz_result.dart';
+import 'package:munich_data_quiz/view/screen/quiz_result.dart';
 import 'package:munich_data_quiz/widgets/quiz_question.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 

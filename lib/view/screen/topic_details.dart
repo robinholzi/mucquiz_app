@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
 import 'package:munich_data_quiz/api/quiz_api.dart';
 import 'package:munich_data_quiz/model/dummy/dummy_numbers.dart';
-import 'package:munich_data_quiz/pages/quiz_page.dart';
+import 'package:munich_data_quiz/view/screen/quiz_page.dart';
 import 'package:munich_data_quiz/widgets/image_widget.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
