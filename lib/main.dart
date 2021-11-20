@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/constants/color.dart';
 import 'package:munich_data_quiz/pages/topic_list.dart';
+import 'package:munich_data_quiz/root.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -59,29 +60,17 @@ class MunichDataQuizApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomePage(),
+      home: const RootApp(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+class RootApp extends StatelessWidget {
+  const RootApp({Key? key}) : super(key: key);
 
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appTitle),
-      ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-        child: const TopicListPage(),
-      ),
-    );
+    return HomePage();
   }
 }
