@@ -62,6 +62,7 @@ class _TopicPageState extends State<TopicPage> {
                     builder: (context) => QuizPage(widget.topic, quiz),
                   ));
 
+                  // When the page is already swiped away, this no longer works.
                   try {
                     _btnController.success();
                   } catch (_) {}
@@ -75,7 +76,13 @@ class _TopicPageState extends State<TopicPage> {
                       );
                     },
                   );
-                  _btnController.reset();
+                } finally {
+                  try {
+                    await Future.delayed(
+                      const Duration(seconds: 1),
+                      _btnController.reset,
+                    );
+                  } catch (_) {}
                 }
               },
               child: Text(AppLocalizations.of(context)!.startQuiz),
