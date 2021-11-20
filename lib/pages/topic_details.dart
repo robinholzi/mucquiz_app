@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
+import 'package:munich_data_quiz/pages/quiz_page.dart';
 import 'package:munich_data_quiz/widgets/image_widget.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -55,6 +56,41 @@ class _TopicPageState extends State<TopicPage> {
               onPressed: () async {
                 // TODO: Load data
                 await Future.delayed(const Duration(seconds: 2));
+
+                var quiz = GeneratedQuiz(
+                  topic: widget.topic,
+                  questions: [
+                    QuizQuestion(
+                      id: 1,
+                      title: "Was ist 3+3?",
+                      description: "Zahlen kann man typischerweise Addieren.",
+                      imgUrl: "https://via.placeholder.com/350x150",
+                      answers: [
+                        QuizAnswer(id: 4, text: "Lorem ipsum dolor sit amet"),
+                        QuizAnswer(id: 3, text: "😂👍"),
+                        QuizAnswer(id: 2, text: " ipsum dolor sit"),
+                        QuizAnswer(id: 1, text: "Lorem amet sönderzäichen"),
+                      ],
+                    ),
+                    QuizQuestion(
+                      id: 2,
+                      title: "Was ist 3-3?",
+                      description:
+                          "Zahlen kann man typischerweise Subtrahieren.",
+                      imgUrl: "https://via.placeholder.com/350x150",
+                      answers: [
+                        QuizAnswer(id: 3, text: "😂👍"),
+                        QuizAnswer(id: 1, text: "Lorem amet sönderzäichen"),
+                        QuizAnswer(id: 2, text: " ipsum dolor sit"),
+                        QuizAnswer(id: 4, text: "Lorem ipsum dolor sit amet"),
+                      ],
+                    ),
+                  ],
+                );
+
+                await Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => QuizPage(widget.topic, quiz),
+                ));
 
                 try {
                   _btnController.success();

@@ -15,6 +15,7 @@ class QuizAPI extends APIClient {
     return Uri.https('url_todo', "/v1" + path, query);
   }
 
+  // TODO: Thus currently doesn't handle code, title, message etc.
   Future<List<Topic>> topics() async {
     var query = <String, dynamic>{};
 
