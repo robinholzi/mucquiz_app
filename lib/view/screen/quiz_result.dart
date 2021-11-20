@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
 import 'package:munich_data_quiz/api/quiz_api.dart';
+import 'package:munich_data_quiz/constants/theme.dart';
+import 'package:munich_data_quiz/view/style/screen/base_titled.dart';
 import 'package:munich_data_quiz/widgets/image_widget.dart';
+import 'package:munich_data_quiz/widgets/title/titlebar.dart';
 
 class QuizResultPage extends StatefulWidget {
   const QuizResultPage(this.quiz, this.submission, {Key? key})
@@ -50,16 +53,21 @@ class _QuizResultPageState extends State<QuizResultPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          question.title,
-          style: titleStyle,
-          textAlign: TextAlign.center,
-        ),
         if ((question.imgUrl ?? "").isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          ClipRRect(
+            borderRadius: const BorderRadius.all(MQTheme.radiusCard),
             child: ImageWidget(question.imgUrl!),
           ),
+        Padding(
+          padding: EdgeInsets.only(
+              top: MQTheme.cardPaddingBigV,
+              bottom: MQTheme.cardPaddingV),
+          child: Text(
+            question.title,
+            style: titleStyle,
+            textAlign: TextAlign.center,
+          ),
+        ),
         if ((question.description ?? "").isNotEmpty)
           Text(
             question.description!,
@@ -86,11 +94,15 @@ class _QuizResultPageState extends State<QuizResultPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.resultPageTitle),
+    return BaseScreenTitled(
+      titleBar: BasicTitleBar(
+        title: (
+            (widget.quiz.topic != null)
+                ? (widget.quiz.topic!.title ?? "")
+                : ""
+        ),
       ),
-      body: Container(
+      child: Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(16),
         child: FutureBuilder<QuizSubmissionResponse>(

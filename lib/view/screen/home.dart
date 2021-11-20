@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BaseScreenTitled(
-      titleBar: DefaultTitleBar(),
+      titleBar: const DefaultTitleBar(),
       child: const TopicListPage(),
     );
   }

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:munich_data_quiz/api/models.dart';
+import 'package:munich_data_quiz/constants/color.dart';
 import 'package:munich_data_quiz/view/screen/quiz_result.dart';
+import 'package:munich_data_quiz/view/style/screen/base_titled.dart';
+import 'package:munich_data_quiz/view/widget/button/rounded_button.dart';
 import 'package:munich_data_quiz/widgets/quiz_question.dart';
+import 'package:munich_data_quiz/widgets/title/titlebar.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 
 class QuizPage extends StatefulWidget {
@@ -59,6 +63,8 @@ class _QuizPageState extends State<QuizPage> {
         },
         itemCount: widget.quiz.questions.length,
         currentPageNotifier: _currentPageNotifier,
+        dotColor: MQColor.primaryColor,
+        selectedDotColor: MQColor.secondaryColor,
       ),
     );
   }
@@ -171,32 +177,21 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => _beforeQuizLeave(context),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.topic.title),
-        ),
-        body: Column(
+    return BaseScreenTitled(
+      titleBar: BasicTitleBar(title: widget.topic.title,),
+      child: WillPopScope(
+        onWillPop: () => _beforeQuizLeave(context),
+        child: Column(
           children: [
             Expanded(
               child: _questionView(),
             ),
             _dotIndicator(),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: OutlinedButton(
-                onPressed: () => _quizSubmit(context),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.endQuiz,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+              padding: const EdgeInsets.all(12.0),
+              child: RoundedButton(
+                onClick: () => _quizSubmit(context),
+                text: AppLocalizations.of(context)!.endQuiz,
               ),
             ),
           ],

@@ -15,6 +15,7 @@ class TopicListPage extends StatefulWidget {
   _TopicListPageState createState() => _TopicListPageState();
 }
 
+// TODO check if pull up to load new works
 class _TopicListPageState extends State<TopicListPage> {
 
   bool loading = true;

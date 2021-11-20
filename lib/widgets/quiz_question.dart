@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:munich_data_quiz/api/models.dart';
+import 'package:munich_data_quiz/constants/theme.dart';
 import 'package:munich_data_quiz/widgets/image_widget.dart';
 
 class QuizQuestionWidget extends StatefulWidget {
@@ -36,21 +37,26 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: MQTheme.screenPaddingH),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              widget.question.title,
-              style: titleStyle,
-              textAlign: TextAlign.center,
-            ),
             if ((widget.question.imgUrl ?? "").isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              ClipRRect(
+                borderRadius: const BorderRadius.all(MQTheme.radiusCard),
                 child: ImageWidget(widget.question.imgUrl!),
               ),
+            Padding(
+              padding: EdgeInsets.only(
+                top: MQTheme.cardPaddingBigV,
+                bottom: MQTheme.cardPaddingV),
+              child: Text(
+                widget.question.title,
+                style: titleStyle,
+                textAlign: TextAlign.center,
+              ),
+            ),
             if ((widget.question.description ?? "").isNotEmpty)
               Text(
                 widget.question.description!,
