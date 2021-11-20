@@ -9,5 +9,15 @@
     "yes": "Ja",
     "endQuiz": "Quiz beenden",
     "endQuizDialogTitle": "Quiz beenden?",
-    "endQuizDialogContent": "Möchtest du weiter zur Auswertung?"
+    "endQuizDialogContent": "Möchtest du weiter zur Auswertung?",
+    "endQuizOneQuestionMissing": "Eine Frage ist noch unbeantwortet. Möchtest du trotzdem die Auswertung sehen?",
+    "endQuizQuestionsMissing": "{count} Fragen sind noch unbeantwortet. Möchtest du trotzdem die Auswertung sehen?",
+    "@endQuizQuestionsMissing": {
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    }
 }

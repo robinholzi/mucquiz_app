@@ -111,11 +111,42 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Future<void> _quizSubmit(BuildContext context) async {
-    var shouldSubmit = await _yesNoDialog(
-      context,
-      title: AppLocalizations.of(context)!.endQuizDialogTitle,
-      content: AppLocalizations.of(context)!.endQuizDialogContent,
-    );
+    var unansweredQuestionsCount = widget.selectedAnswers
+        .map(
+          (q) => q.containsValue(true),
+        )
+        .fold(
+          0,
+          (int prev, bool answered) => prev + (answered ? 0 : 1),
+        );
+
+    var shouldSubmit = false;
+
+    // Depending on how many questions were left unanswered, we show different dialogs
+    switch (unansweredQuestionsCount) {
+      case 0:
+        shouldSubmit = await _yesNoDialog(
+          context,
+          title: AppLocalizations.of(context)!.endQuizDialogTitle,
+          content: AppLocalizations.of(context)!.endQuizDialogContent,
+        );
+        break;
+      case 1:
+        shouldSubmit = await _yesNoDialog(
+          context,
+          title: AppLocalizations.of(context)!.endQuizDialogTitle,
+          content: AppLocalizations.of(context)!.endQuizOneQuestionMissing,
+        );
+        break;
+      default:
+        shouldSubmit = await _yesNoDialog(
+          context,
+          title: AppLocalizations.of(context)!.endQuizDialogTitle,
+          content: AppLocalizations.of(context)!
+              .endQuizQuestionsMissing(unansweredQuestionsCount),
+        );
+        break;
+    }
     if (!shouldSubmit) {
       return;
     }
