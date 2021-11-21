@@ -20,7 +20,7 @@ class APIClient {
     var response = await httpClient.get(url, headers: {
       "Accept": "application/json",
       "User-Agent": "munich_data_quiz",
-    }).timeout(const Duration(seconds: 15));
+    }).timeout(const Duration(seconds: 10));
 
     if (kDebugMode) {
       debugPrint(

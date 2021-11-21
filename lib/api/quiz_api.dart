@@ -64,7 +64,7 @@ class QuizAPI extends APIClient {
         "Accept": "application/json",
         "User-Agent": "munich_data_quiz",
       },
-    ).timeout(const Duration(seconds: 15));
+    ).timeout(const Duration(seconds: 10));
 
     if (response.statusCode < 200 || response.statusCode >= 300) {
       throw HttpException("Unexpected status code ${response.statusCode}");
