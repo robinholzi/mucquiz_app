@@ -10,17 +10,17 @@ It is [a submission](https://devpost.com/software/datenteam) for the City of Mun
 
 |                           Topic listing                           |                          Topic                           |                           Topic                           |
 | :---------------------------------------------------------------: | :------------------------------------------------------: | :-------------------------------------------------------: |
-| ![Topic listing](.github/screenshots/topic-overview.jpg?raw=true) | ![Topic](.github/screenshots/topic-details.jpg?raw=true) | ![Topic](.github/screenshots/topic-details2.jpg?raw=true) |
+| ![Topic listing](.github/screenshots/topic-overview.jpg) | ![Topic](.github/screenshots/topic-details.jpg) | ![Topic](.github/screenshots/topic-details2.jpg) |
 
 
 |                          Quiz Question                           |                           Quiz Question                           |
 | :--------------------------------------------------------------: | :---------------------------------------------------------------: |
-| ![Quiz question](.github/screenshots/quiz-question.jpg?raw=true) | ![Quiz question](.github/screenshots/quiz-question2.jpg?raw=true) |
+| ![Quiz question](.github/screenshots/quiz-question.jpg) | ![Quiz question](.github/screenshots/quiz-question2.jpg) |
 
 
 |                                                                      |                            Quiz Evaluation                            |                                                                       |
 | :------------------------------------------------------------------: | :-------------------------------------------------------------------: | :-------------------------------------------------------------------: |
-| ![Quiz evaluation](.github/screenshots/quiz-evaluation.jpg?raw=true) | ![Quiz evaluation](.github/screenshots/quiz-evaluation2.jpg?raw=true) | ![Quiz evaluation](.github/screenshots/quiz-evaluation3.jpg?raw=true) |
+| ![Quiz evaluation](.github/screenshots/quiz-evaluation.jpg) | ![Quiz evaluation](.github/screenshots/quiz-evaluation2.jpg) | ![Quiz evaluation](.github/screenshots/quiz-evaluation3.jpg) |
 
 
 
