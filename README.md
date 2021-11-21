@@ -29,4 +29,4 @@ You can install this app on your Android device by [downloading the APK file fro
 
 
 ### Other repositories
-There's a repository for the [backend service](https://github.com/nerotyc/mucquiz-backend) and another one for the [data parsing logic](https://github.com/nerotyc/mucquiz_data_parsing).
+There's a repository for the [backend service](https://github.com/nerotyc/mucquiz_backend) and another one for the [data parsing logic](https://github.com/nerotyc/mucquiz_data_parsing).
