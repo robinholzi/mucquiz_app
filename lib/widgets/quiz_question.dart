@@ -23,21 +23,7 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
   );
 
   Widget _answer(BuildContext context, QuizAnswer answer) {
-    return CheckboxListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(MQTheme.radiusCard * 2),
-      ),
-      title: Text(
-        answer.text ?? "",
-        style: MQTheme.defaultTextStyle,
-      ),
-      onChanged: (newValue) async {
-        setState(() {
-          widget.selectedAnswers[answer.id] = newValue ?? false;
-        });
-      },
-      value: widget.selectedAnswers[answer.id] ?? false,
-    );
+    return AnswerCheckbox(answer, widget.selectedAnswers);
   }
 
   @override
@@ -76,6 +62,38 @@ class _QuizQuestionWidgetState extends State<QuizQuestionWidget> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class AnswerCheckbox extends StatefulWidget {
+  const AnswerCheckbox(this.answer, this.selectedAnswers, {Key? key})
+      : super(key: key);
+
+  final QuizAnswer answer;
+  final Map<int, bool> selectedAnswers;
+
+  @override
+  _AnswerCheckboxState createState() => _AnswerCheckboxState();
+}
+
+class _AnswerCheckboxState extends State<AnswerCheckbox> {
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(MQTheme.radiusCard * 2),
+      ),
+      title: Text(
+        widget.answer.text ?? "",
+        style: MQTheme.defaultTextStyle,
+      ),
+      onChanged: (newValue) async {
+        setState(() {
+          widget.selectedAnswers[widget.answer.id] = newValue ?? false;
+        });
+      },
+      value: widget.selectedAnswers[widget.answer.id] ?? false,
     );
   }
 }
