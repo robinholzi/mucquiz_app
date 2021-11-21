@@ -82,8 +82,9 @@ class _AnswerCheckboxState extends State<AnswerCheckbox> {
   Widget build(BuildContext context) {
     return CheckboxListTile(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(MQTheme.radiusCard * 2),
+        borderRadius: BorderRadius.all(MQTheme.radiusCard),
       ),
+      dense: true,
       title: Text(
         widget.answer.text ?? "",
         style: MQTheme.defaultTextStyle,

@@ -76,6 +76,7 @@ class TitleBarWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(left: Navigator.of(context).canPop() ? 20 : 32,
           top: 12, bottom: 12, right: 32),
+      color: MQColor.bgColorLight,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.max,

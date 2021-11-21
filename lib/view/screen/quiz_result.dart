@@ -44,8 +44,9 @@ class _QuizResultPageState extends State<QuizResultPage> {
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: CheckboxListTile(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(MQTheme.radiusCard * 2),
+          borderRadius: BorderRadius.all(MQTheme.radiusCard),
         ),
+        dense: true,
         title: Text(
           answer.text ?? "",
           style: MQTheme.defaultTextStyle,
