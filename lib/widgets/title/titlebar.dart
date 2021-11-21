@@ -130,7 +130,7 @@ class DefaultTitleBar extends StatelessWidget {
   const DefaultTitleBar({Key? key}) : super(key: key);
 
   void launchBrowser() async {
-    const url = "https://github.com/nerotyc/mucquiz-app";
+    const url = "https://github.com/nerotyc/mucquiz_app";
     if (await canLaunch(url)) await launch(url);
     else {
       Fluttertoast.showToast(msg: "Could not launch $url");
