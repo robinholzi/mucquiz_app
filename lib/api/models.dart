@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:munich_data_quiz/model/dummy/dummy_assets.dart';
+import 'package:munich_data_quiz/widgets/image_widget.dart';
 
 class Topic {
   Topic({
@@ -8,15 +10,16 @@ class Topic {
     required this.imageUrl,
     required this.id,
   });
-  Topic.random(BuildContext ctx) : imageUrl=null {
+  Topic.random(BuildContext ctx) {
     title = AppLocalizations.of(ctx)!.randomTopic;
     description = AppLocalizations.of(ctx)!.randomTopicDescr;
+    imageUrl = localImgReplacer + DummyAssets.randMunichImage;
     id = -1;
   }
 
   late final String title;
   late final String? description;
-  final String? imageUrl;
+  late final String? imageUrl;
   late final int id;
 
   factory Topic.fromJson(Map<String, dynamic> json) {

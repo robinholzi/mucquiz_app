@@ -60,6 +60,7 @@ class _TopicPageState extends State<TopicPage> {
                     style: const TextStyle(
                       fontSize: 16,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               SizedBox(height: MQTheme.cardPaddingBigV,),

@@ -62,19 +62,18 @@ class _TopicWidgetState extends State<TopicWidget> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  if ((widget.topic.imageUrl ?? "").isNotEmpty)
-                    SizedBox(
-                      width: double.infinity,
-                      height: max(MediaQuery.of(context).size.height / 4, 200),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(MQTheme.radiusCard),
-                        child: ImageWidget(
-                          widget.topic.imageUrl,
-                          heroTag: "topic-image",
-                          id: "${widget.topic.id}",
-                        ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: max(MediaQuery.of(context).size.height / 4, 200),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(MQTheme.radiusCard),
+                      child: ImageWidget(
+                        widget.topic.imageUrl,
+                        heroTag: "topic-image",
+                        id: "${widget.topic.id}",
                       ),
                     ),
+                  ),
                   if ((widget.topic.description ?? "").isNotEmpty)
                     expanded ? Padding(
                       padding: widget.topic.imageUrl == null

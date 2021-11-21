@@ -15,6 +15,8 @@ class ImageWidget extends StatefulWidget {
   _ImageWidgetState createState() => _ImageWidgetState();
 }
 
+const localImgReplacer = "@@@local@@@";
+
 class _ImageWidgetState extends State<ImageWidget>
     with AutomaticKeepAliveClientMixin {
   @override
@@ -28,9 +30,16 @@ class _ImageWidgetState extends State<ImageWidget>
   );
 
   Widget _image(BuildContext context, String? _imageURL) {
-    if (_imageURL != null) {
+    String localUrl = DummyAssets.randMunichImage;
+    if ((_imageURL ?? "").startsWith(localImgReplacer)) {
+      localUrl = (_imageURL??"").replaceAll(localImgReplacer, "");
+      _imageURL = null;
+    }
+
+
+    if ((_imageURL ?? "").isNotEmpty) {
       return CachedNetworkImage(
-        imageUrl: _imageURL,
+        imageUrl: _imageURL!,
         cacheManager: _cacheManager,
         fadeInDuration: const Duration(milliseconds: 125),
         fadeOutDuration: const Duration(milliseconds: 250),
@@ -38,15 +47,18 @@ class _ImageWidgetState extends State<ImageWidget>
         progressIndicatorBuilder: (context, url, downloadProgress) => Center(
           child: CircularProgressIndicator(value: downloadProgress.progress),
         ),
-        errorWidget: (context, url, error) => _defaultImage(),
+        errorWidget: (context, url, error) => _defaultImage(localUrl),
       );
     }
 
-    return _defaultImage();
+    return _defaultImage(localUrl);
   }
 
-  Widget _defaultImage() {
-    return Image.asset(DummyAssets.randMunichImage);
+  Widget _defaultImage(String localUrl) {
+    return Image.asset(
+      localUrl,
+      fit: BoxFit.cover,
+    );
   }
 
   @override
